@@ -18,5 +18,5 @@ Factory.define(Profile, {
   "last_name":"Guy"
 })
 
-object = Factory.create(Profile, {})
-object2 = Factory.build(Profile, {})
+object = Factory.create(Profile)
+object2 = Factory.build(Profile, { "username": "Anotherguy" })
