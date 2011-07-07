@@ -28,7 +28,7 @@ To begin, we need to define our Factory.  We do this with the Factory.define met
 
 From there, we are able to use the `Factory.build()` and `Factory.create()` methods to create new objects of the time.  The difference between build and create is that create will automatically call the save() method on the built object.
 
-See the examples directory for more information.
+See the `examples` directory for more information.
 
 
 Credit
@@ -36,5 +36,5 @@ Credit
 
 This library was inspired by [factory_girl](http://github.com/thoughtbot/factory_girl/) because I wanted something similar while working in NodeJS.  It is by no means as fully functional as factory_girl, but it's a start.
 
-Author: Andrew Nordman <anordman@agoragames.com>
-GitHub: http://github.com/cadwallion/
+* Author: Andrew Nordman <anordman@agoragames.com>
+* GitHub: http://github.com/cadwallion/
