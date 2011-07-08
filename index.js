@@ -16,6 +16,7 @@
     
     object_data = Hash.merge(Factory.patterns[model]["attributes"], data);
     object = new(Factory.patterns[model]["class"])(object_data);
+    return object;
   }
   Factory.create = function(model, data) {
     object = Factory.build(model, data);
