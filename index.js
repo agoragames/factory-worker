@@ -6,16 +6,16 @@
   function Factory() {}
   
   Factory.patterns = Hash({});
-  Factory.define = function(model, def) {
-    Factory.patterns[model] = def;
+  Factory.define = function(key, model, def) {
+    Factory.patterns[key] = { "class": model, "attributes": def };
   }
   Factory.build = function(model, data) {
     if (data === undefined) {
       data = {};
     }
     
-    object_data = Hash.merge(Factory.patterns[model], data);
-    object = new(model)(object_data);
+    object_data = Hash.merge(Factory.patterns[model]["attributes"], data);
+    object = new(Factory.patterns[model]["class"])(object_data);
   }
   Factory.create = function(model, data) {
     object = Factory.build(model, data);

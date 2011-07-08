@@ -19,12 +19,13 @@ To begin, we need to define our Factory.  We do this with the Factory.define met
 ``` js
   var Factory = require('factory-worker');
   
-  Factory.define(Profile, {
+  Factory.define("profile", Profile, {
     "username":"Coolguy123",
     "first_name":"Cool",
     "last_name":"Guy"
   })
 ```
+In the example above, we've created the "profile" Factory for the class Profile with our default attributes.
 
 From there, we are able to use the `Factory.build()` and `Factory.create()` methods to create new objects of the time.  The difference between build and create is that create will automatically call the save() method on the built object.
 
