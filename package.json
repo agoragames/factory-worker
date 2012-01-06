@@ -4,7 +4,7 @@
   "description": "NodeJS Datastore-agnostic Factory pattern",
   "keywords": ["factory", "datastore", "testing"],
   "main": "./index.js",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/agoragames/factory-worker.git"
@@ -15,5 +15,7 @@
   "dependencies": {
     "hashish": ">=0.0.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jessie": ">=0.3.7" 
+  }
 }
