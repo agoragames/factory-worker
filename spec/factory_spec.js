@@ -64,7 +64,7 @@ describe('Factory#create', function() {
 
   it('can also override attributes like Factory#build', function() {
     var object;
-    Factory.create('test', { name: 'Test Object', dynamic: "another value" }, function(e, o) {
+    Factory.create('test', { name: function(){return 'Test Object';}, dynamic: "another value" }, function(e, o) {
       object = o; 
     })
     waitsFor(function() { return object != null}, 'object creation failed', 1000);

@@ -14,14 +14,14 @@ module.exports = {
     }
 
     var attributes = this.patterns[model].attributes
-    var values = Hash.map(attributes, function(value, key){
+    var values = Hash.merge(attributes, data);
+    values = Hash.map(values, function(value, key){
       if (typeof(value) == 'function'){
         return value.call(data);
       } else {
         return value;
       }
     });
-    values = Hash.merge(values, data);
     obj = new(this.patterns[model].class)(values);
     return obj;
   },
