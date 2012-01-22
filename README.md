@@ -19,11 +19,16 @@ To begin, we need to define our Factory.  We do this with the Factory.define met
   Factory.define("profile", Profile, {
     "username":"Coolguy123",
     "first_name":"Cool",
-    "last_name":"Guy"
+    "last_name":"Guy",
+    "created_at": function(){
+      return new Date();
+    }
   })
 ```
 
 In the example above, we've created the "profile" Factory for the class Profile with our default attributes.
+
+The "created_at" attribute will be filled dynamically by evaluating the function at object build time. This is useful to dynamically fill attributes with a name generator, e.g. https://github.com/marak/Faker.js/
 
 
 *build(factory, [attributes])*
