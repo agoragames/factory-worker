@@ -1,4 +1,4 @@
-# Factory Worker
+# Factory Worker [![Build Status](https://secure.travis-ci.org/agoragames/factory-worker.png)](https://secure.travis-ci.org/agoragames/factory-worker.png)
 
 Factory Worker is a node.js library that creates the Factory pattern for object stores.  It assumes the objects are building respond to new() and save().  Other than that, it does not care.
 
