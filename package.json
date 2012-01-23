@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git://github.com/agoragames/factory-worker.git"
   },
+  "scripts": {
+    "test": "./node_modules/.bin/jessie spec"
+  },
   "engines": {
     "node": ">=0.4.8"
   },
