@@ -22,7 +22,7 @@ module.exports = {
         return value;
       }
     });
-    obj = new(this.patterns[model].class)(values);
+    var obj = new(this.patterns[model].class)(values);
     return obj;
   },
   create: function(model, data, callback) {
