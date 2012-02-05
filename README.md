@@ -23,7 +23,7 @@ To begin, we need to define our Factory.  We do this with the Factory.define met
     "created_at": function(){
       return new Date();
     }
-  })
+  });
 ```
 
 In the example above, we've created the "profile" Factory for the class Profile with our default attributes.
@@ -31,9 +31,29 @@ In the example above, we've created the "profile" Factory for the class Profile 
 The "created_at" attribute will be filled dynamically by evaluating the function at object build time. This is useful to dynamically fill attributes with a name generator, e.g. https://github.com/marak/Faker.js/
 
 
-*build(factory, [attributes])*
+*build(factory, [attributes], [callback])*
 
-Builds an instance of the factory, overriding the factory with the attributes hash if passed.
+Builds an instance of the factory, overriding the factory with the attributes hash if passed. 
+
+If a callback is passed, it is possible to use callback functions for building attributes. The callback is detected by checking if the attribute function will accept arguments. Here is an example that will create
+BlogEntry for a Comment object and set the foreign key accordingly.
+
+```js
+  var Factory = require('factory-worker');
+
+  Factory.define("comment", Comment, {
+    "text": "Comment text",
+    "blogEntry": function(callback){
+      Factory.create("BlogEntry", function(err, entry){
+        callback(err, entry._id);
+      });
+    }
+  });
+
+  Factory.build("comment", {text: "some other comment text"}, function(err, comment){
+    console.log(err, comment);
+  });
+```
 
 *create(factory, [attributes], callback)*
 
