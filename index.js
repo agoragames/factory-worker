@@ -38,7 +38,7 @@ module.exports = {
       return obj;
     } else {
       // callback given, convert everything to function style
-      callbacks = []
+      var callbacks = []
       Hash.forEach(values, function(value, key){
         if (typeof(value) == 'function'){
           if (value.length == 0){
