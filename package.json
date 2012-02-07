@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "hashish": ">=0.0.3"
+  , "seq": ">= 0.3.5"
   },
   "devDependencies": {
     "jessie": ">=0.3.7" 

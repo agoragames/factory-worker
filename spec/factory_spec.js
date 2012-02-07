@@ -4,17 +4,23 @@ describe('Factory#define', function() {
       return "dynamic";
     }
 
+    callback_function = function(callback){
+      return callback(null, 'called');
+    }
+
     Factory.define('test', TestModel, {
       name: 'Test Model',
       real: false,
-      dynamic: dynamic_function})
+      dynamic: dynamic_function,
+      called: callback_function})
 
     expect(Factory.patterns.test).toEqual({
       class: TestModel,
       attributes: {
         name: 'Test Model',
         real: false,
-        dynamic: dynamic_function
+        dynamic: dynamic_function,
+        called: callback_function
       }
     })
   })
@@ -32,17 +38,44 @@ describe('Factory#build', function() {
   })
 
   it('uses the stored definition to seed attribute values', function() {
-    object = Factory.build('test') 
+    var object = Factory.build('test') 
     expect(object.name).toEqual('Test Model')
     expect(object.real).toEqual(false)
     expect(object.dynamic).toEqual("dynamic")
   })
 
   it('takes an optional parameter to override stores attributes', function() {
-    object = Factory.build('test', { real: true }) 
+    var object = Factory.build('test', { real: true }) 
     expect(object.name).toEqual('Test Model')
     expect(object.real).toEqual(true)
   })
+})
+
+describe('Factory#build_with_callback', function() {
+  beforeEach(function() {
+    Factory.define('test_callback', TestModel, {
+      called: function(cbk) {
+        return cbk(null, 'called');
+      }
+    })
+  })
+
+  it('uses the stored definition to seed attribute values', function() {
+    var object = null;
+    Factory.build('test_callback', function(err, obj){
+      object = obj;
+    });
+    waitsFor(function() { return object != null}, 'object creation failed', 1000);
+    runs(function(){
+      expect(object.called).toEqual("called");
+    });
+  })
+
+  it("throws an error if no callback is given", function(){
+    expect(function(){
+      Factory.build('test_callback');
+    }).toThrow('you need to pass a callback to the build function - setter for attribute "called" is asynchronous');
+  });
 })
 
 describe('Factory#create', function() {
@@ -52,25 +85,23 @@ describe('Factory#create', function() {
       real: false,
       dynamic: function() {
         return "dynamic";
+      },
+      called: function(cbk) {
+        return cbk(null, 'called');
       }
-    }) 
+    })
   })
 
-  it('should call Factory.build, passing the factory name and data', function() {
-    spyOn(Factory, 'build').andCallThrough()
-    Factory.create('test', function(error) {})
-    expect(Factory.build).toHaveBeenCalledWith('test', {})
-  })
-
-  it('can also override attributes like Factory#build', function() {
+  it('should override attributes like Factory#build', function() {
     var object;
-    Factory.create('test', { name: function(){return 'Test Object';}, dynamic: "another value" }, function(e, o) {
+    Factory.create('test', { name: function(){return 'Test Object';}, dynamic: "another value", called: function(cbk){return cbk(null, 'new value');} }, function(e, o) {
       object = o; 
     })
     waitsFor(function() { return object != null}, 'object creation failed', 1000);
     runs(function() {
       expect(object.name).toEqual('Test Object');
       expect(object.dynamic).toEqual('another value');
+      expect(object.called).toEqual('new value');
     })
   })
 })
