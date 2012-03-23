@@ -73,11 +73,11 @@ module.exports = {
       data = {};
     }
 
-    this.build(model, data, function(err, obj){
+    this.build(model, data, function(err, builtObj){
       if (err)
         throw(err);
-      obj.save(function(error) {
-        callback(error, obj);
+      builtObj.save(function(error, createdObj) {
+        callback(error, createdObj);
       })
     });
   }
