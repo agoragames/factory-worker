@@ -20,6 +20,6 @@
   , "seq": ">= 0.3.5"
   },
   "devDependencies": {
-    "jessie": ">=0.3.7" 
+    "jessie": ">=0.4.2" 
   }
 }
