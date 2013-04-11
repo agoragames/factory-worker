@@ -44,10 +44,10 @@ describe('Factory#define', function() {
     })
   })
 
-  it('throws an error if the named parent model has not been defined', function() {
+  it('throws an error if the referenced parent model has not been defined', function() {
     expect(function() {
       Factory.define('testChild', 'badParentName', {});
-    }).toThrow('no parent model with that name has been defined');
+    }).toThrow('no parent model with that key has been defined');
   })
 })
 

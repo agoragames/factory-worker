@@ -9,7 +9,7 @@ module.exports = {
       // If 'model' is a string, interpret it as the name of a model that has
       // already been defined. Try to inherit from that model.
       if (!(model in this.patterns)) {
-        throw('no parent model with that name has been defined');
+        throw('no parent model with that key has been defined');
       } else {
         _model = this.patterns[model].class;
         _def = Hash.merge(this.patterns[model].attributes, def);
