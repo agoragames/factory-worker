@@ -1,5 +1,5 @@
 describe('Factory#define', function() {
-  it('stores the definition on the factory name', function() {
+  beforeEach(function() {
     dynamic_function = function() {
       return "dynamic";
     }
@@ -12,8 +12,11 @@ describe('Factory#define', function() {
       name: 'Test Model',
       real: false,
       dynamic: dynamic_function,
-      called: callback_function})
+      called: callback_function
+    })
+  })
 
+  it('stores the definition on the factory name', function() {
     expect(Factory.patterns.test).toEqual({
       class: TestModel,
       attributes: {
