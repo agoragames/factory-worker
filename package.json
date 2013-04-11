@@ -1,5 +1,5 @@
 {
-  "author": "Andrew Nordman <anordman@agoragames.com>",
+  "author": "Andrew Nordman <cadwallion@gmail.com>",
   "name": "factory-worker",
   "description": "NodeJS Datastore-agnostic Factory pattern",
   "keywords": ["factory", "datastore", "testing"],
