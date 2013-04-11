@@ -4,10 +4,24 @@ var Seq = require('seq');
 module.exports = {
   patterns: {},
   define: function(key, model, def) {
-    this.patterns[key] = {
-      class: model,
-      attributes: def
+    var _model, _def;
+    if (typeof(model) == 'string') {
+      // If 'model' is a string, interpret it as the name of a model that has
+      // already been defined. Try to inherit from that model.
+      if (!(model in this.patterns)) {
+        throw('no parent model with that key has been defined');
+      } else {
+        _model = this.patterns[model].class;
+        _def = Hash.merge(this.patterns[model].attributes, def);
+      }
+    } else {
+      _model = model;
+      _def = def;
     }
+    this.patterns[key] = {
+      class: _model,
+      attributes: _def
+    };
   },
   build: function(model, data, callback) {
     if (typeof(data) == 'function'){

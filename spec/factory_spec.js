@@ -1,5 +1,5 @@
 describe('Factory#define', function() {
-  it('stores the definition on the factory name', function() {
+  beforeEach(function() {
     dynamic_function = function() {
       return "dynamic";
     }
@@ -12,8 +12,11 @@ describe('Factory#define', function() {
       name: 'Test Model',
       real: false,
       dynamic: dynamic_function,
-      called: callback_function})
+      called: callback_function
+    })
+  })
 
+  it('stores the definition on the factory name', function() {
     expect(Factory.patterns.test).toEqual({
       class: TestModel,
       attributes: {
@@ -23,6 +26,28 @@ describe('Factory#define', function() {
         called: callback_function
       }
     })
+  })
+
+  it('inherits from already-defined models by key', function() {
+    Factory.define('testChild', 'test', {
+      name: 'Test Model Child'
+    })
+
+    expect(Factory.patterns.testChild).toEqual({
+      class: TestModel,
+      attributes: {
+        name: 'Test Model Child',
+        real: false,
+        dynamic: dynamic_function,
+        called: callback_function
+      }
+    })
+  })
+
+  it('throws an error if the referenced parent model has not been defined', function() {
+    expect(function() {
+      Factory.define('testChild', 'badParentName', {});
+    }).toThrow('no parent model with that key has been defined');
   })
 })
 
