@@ -27,6 +27,22 @@ describe('Factory#define', function() {
       }
     })
   })
+
+  it('inherits from already-defined models by name', function() {
+    Factory.define('testChild', 'test', {
+      name: 'Test Model Child'
+    })
+
+    expect(Factory.patterns.testChild).toEqual({
+      class: TestModel,
+      attributes: {
+        name: 'Test Model Child',
+        real: false,
+        dynamic: dynamic_function,
+        called: callback_function
+      }
+    })
+  }) 
 })
 
 describe('Factory#build', function() {
