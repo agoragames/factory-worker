@@ -42,7 +42,13 @@ describe('Factory#define', function() {
         called: callback_function
       }
     })
-  }) 
+  })
+
+  it('throws an error if the named parent model has not been defined', function() {
+    expect(function() {
+      Factory.define('testChild', 'badParentName', {});
+    }).toThrow('no parent model with that name has been defined');
+  })
 })
 
 describe('Factory#build', function() {
