@@ -28,7 +28,7 @@ describe('Factory#define', function() {
     })
   })
 
-  it('inherits from already-defined models by name', function() {
+  it('inherits from already-defined models by key', function() {
     Factory.define('testChild', 'test', {
       name: 'Test Model Child'
     })
