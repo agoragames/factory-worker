@@ -9,7 +9,7 @@ module.exports = {
       // If 'model' is a string, interpret it as the name of a model that has
       // already been defined. Try to inherit from that model.
       if (!(model in this.patterns)) {
-        throw('no parent model with that key has been defined');
+        throw('No parent model with the key "'+model+'" has been defined.');
       } else {
         _model = this.patterns[model].class;
         _def = Hash.merge(this.patterns[model].attributes, def);
@@ -40,7 +40,7 @@ module.exports = {
       values = Hash.map(values, function(value, key){
         if (typeof(value) == 'function'){
           if (value.length > 0){
-            throw('you need to pass a callback to the build function - setter for attribute "' + key + '" is asynchronous');
+            throw new Error('You need to pass a callback to the build function - setter for attribute "' + key + '" is asynchronous.');
           } else {
             return value.call();
           }

@@ -47,7 +47,7 @@ describe('Factory#define', function() {
   it('throws an error if the referenced parent model has not been defined', function() {
     expect(function() {
       Factory.define('testChild', 'badParentName', {});
-    }).toThrow('no parent model with that key has been defined');
+    }).toThrow('No parent model with the key "badParentName" has been defined.');
   })
 })
 
@@ -99,7 +99,7 @@ describe('Factory#build_with_callback', function() {
   it("throws an error if no callback is given", function(){
     expect(function(){
       Factory.build('test_callback');
-    }).toThrow('you need to pass a callback to the build function - setter for attribute "called" is asynchronous');
+    }).toThrow('You need to pass a callback to the build function - setter for attribute "called" is asynchronous.');
   });
 })
 
